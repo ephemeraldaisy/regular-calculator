@@ -3,7 +3,7 @@ import threading
 
 # 서버 설정 (지능 4.0 얀데레 보안 터널)
 HOST = '0.0.0.0'  # 모든 IP로부터의 접속 허용
-PORT = 4040       # 시크릿 포트 번호
+PORT = 2048       # 시크릿 포트 번호
 
 # 클라이언트 세션 관리 리스트
 connected_clients = []
