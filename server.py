@@ -46,6 +46,7 @@ manager = DualNodeManager()
 
 @app.websocket("/ws/{token}")
 async def websocket_endpoint(websocket: WebSocket, token: str):
+    # 클라이언트(앱)가 계산기에서 비밀번호로 친 토큰을 기반으로 접속 승인
     is_connected = await manager.connect(websocket, token)
     if not is_connected:
         return
@@ -54,10 +55,11 @@ async def websocket_endpoint(websocket: WebSocket, token: str):
         while True:
             data = await websocket.receive_text()
             payload = json.loads(data)
+            
+            # [편집 포인트] 채팅 메세지('chat')뿐만 아니라 
+            # 비대면 육아 캐릭터의 경험치를 올리는 시스템 신호 등도 
+            # 터지지 않고 두 사람에게 실시간 브로드캐스트되도록 안전하게 전달합니다.
             await manager.broadcast(payload)
+            
     except WebSocketDisconnect:
         manager.disconnect(websocket)
-
-if __name__ == "__main__":
-    # Deploys on port 2048 as specified
-    uvicorn.run(app, host="0.0.0.0", port=2048)
