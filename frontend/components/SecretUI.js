@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, FlatList, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 
-const SERVER_URL = 'ws://YOUR_SERVER_IP:2048/ws'; 
+const SERVER_URL = 'ws://192.168.45.35:2048/ws'; 
 
 export default function SecretUI({ token }) {
   const [messages, setMessages] = useState([]);
